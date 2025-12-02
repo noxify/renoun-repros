@@ -1,0 +1,194 @@
+---
+title: "Table"
+---
+
+## Source
+
+The component uses
+
+- https://ui.shadcn.com/docs/components/table
+
+## Example - markdown w/o alignments
+
+| Item              | In Stock | Price |
+| ----------------- | -------- | ----- |
+| Python Hat        | True     | 23.99 |
+| SQL Hat           | True     | 23.99 |
+| Codecademy Tee    | False    | 19.99 |
+| Codecademy Hoodie | False    | 42.99 |
+
+```md showLineNumbers
+| Item              | In Stock | Price |
+| ----------------- | -------- | ----- |
+| Python Hat        | True     | 23.99 |
+| SQL Hat           | True     | 23.99 |
+| Codecademy Tee    | False    | 19.99 |
+| Codecademy Hoodie | False    | 42.99 |
+```
+
+## Example - markdown w/ alignments
+
+| Item              | In Stock | Price |
+| :---------------- | :------: | ----: |
+| Python Hat        |   True   | 23.99 |
+| SQL Hat           |   True   | 23.99 |
+| Codecademy Tee    |  False   | 19.99 |
+| Codecademy Hoodie |  False   | 42.99 |
+
+```md showLineNumbers
+| Item              | In Stock | Price |
+| :---------------- | :------: | ----: |
+| Python Hat        |   True   | 23.99 |
+| SQL Hat           |   True   | 23.99 |
+| Codecademy Tee    |  False   | 19.99 |
+| Codecademy Hoodie |  False   | 42.99 |
+```
+
+## Example - table builder
+
+<Preview>
+
+<TableBuilder
+  columns={[
+    {
+      id: "item",
+      title: "Item",
+    },
+    {
+      id: "inStock",
+      title: "In Stock",
+    },
+    {
+      id: "price",
+      title: "Price",
+    },
+  ]}
+  data={[
+    {
+      item: "Python Hat",
+      inStock: true,
+      price: "13.99"
+    },
+    {
+      item: "SQL Hat",
+      inStock: true,
+      price: "23.99",
+    },
+
+]}
+/>
+
+</Preview>
+
+## Example - data table builder
+
+<Preview>
+  <DataTableBuilder
+    columns={[
+      {
+        id: "status",
+        title: "Status",
+      },
+      {
+        id: "email",
+        title: "Email",
+      },
+      {
+        id: "amount",
+        title: "Amount",
+      },
+    ]}
+    data={[
+      {
+        id: "1",
+        amount: 101,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "2",
+        amount: 102,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "3",
+        amount: 103,
+        status: "active",
+        email: "m3@example.com",
+      },
+      {
+        id: "4",
+        amount: 104,
+        status: "retired",
+        email: "m@example.com",
+      },
+      {
+        id: "5",
+        amount: 105,
+        status: "active",
+        email: "m@example.com",
+      },
+      {
+        id: "1",
+        amount: 101,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "2",
+        amount: 102,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "3",
+        amount: 103,
+        status: "active",
+        email: "m3@example.com",
+      },
+      {
+        id: "4",
+        amount: 104,
+        status: "retired",
+        email: "m@example.com",
+      },
+      {
+        id: "5",
+        amount: 105,
+        status: "active",
+        email: "m@example.com",
+      },
+      {
+        id: "1",
+        amount: 101,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "2",
+        amount: 102,
+        status: "pending",
+        email: "m@example.com",
+      },
+      {
+        id: "3",
+        amount: 103,
+        status: "active",
+        email: "m3@example.com",
+      },
+      {
+        id: "4",
+        amount: 104,
+        status: "retired",
+        email: "m@example.com",
+      },
+      {
+        id: "5",
+        amount: 105,
+        status: "active",
+        email: "m@example.com",
+      },
+    ]}
+  />
+</Preview>
