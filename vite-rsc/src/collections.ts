@@ -189,22 +189,15 @@ export function isHiddenTransformed(
  */
 
 export const getFileContent = cache(async (source: EntryType) => {
-  // Don't early return for directories - they might have index.mdx files
-  // if (!isFile(source) && isDirectory(source)) {
-  //   return null
-  // }
-
   const segments = source.getPathnameSegments({
     includeBasePathname: true,
     includeDirectoryNamedSegment: true,
   })
 
-  // if (segments[0] === "datareef") {
-  //   console.dir({ path: source.getPathname(), segments }, { depth: null })
-  // }
-
   const [segmentFile, indexFile, readmeFile] = await Promise.all([
-    DocumentationGroup.getFile(segments, "mdx").catch(() => null),
+    isDirectory(source)
+      ? null
+      : DocumentationGroup.getFile(segments, "mdx").catch(() => null),
     DocumentationGroup.getFile([...segments, "index"], "mdx").catch(() => null),
     DocumentationGroup.getFile([...segments, "readme"], "mdx").catch(
       () => null,
@@ -317,6 +310,7 @@ export async function getSiblings(
  */
 export const getTransformedEntry = cache(async (source: EntryType) => {
   const file = await getFileContent(source)
+
   const metadata = file ? await getMetadata(file) : null
 
   return {

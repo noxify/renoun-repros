@@ -41,7 +41,7 @@ export function SidebarItem({ item }: { item: TreeItem }) {
 
   return (
     <SidebarMenuItem>
-      <Collapsible defaultOpen className="group/collapsible">
+      <Collapsible defaultOpen={isActive} className="group/collapsible">
         <CollapsibleTrigger asChild>
           <SidebarMenuButton
             isActive={isActive}

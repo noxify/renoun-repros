@@ -1,22 +1,48 @@
-import { RootProvider } from "renoun";
+import { TailwindIndicator } from "@/components/tailwind-indicator"
 
-export default async function RootElement({
+import "@/styles.css"
+
+import { ThemeProvider } from "next-themes"
+import { RootProvider } from "renoun"
+
+export default function RootElement({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <RootProvider theme={{light: "github-light", dark: "github-dark"}} languages={["tsx", "ts","jsx", "js", "json", "css", "html", "bash", "ini"]}>
+    <RootProvider
+      git={"noxify/renoun-docs-vite"}
+      theme={{ light: "github-light", dark: "github-dark" }}
+      includeThemeScript={false}
+      languages={[
+        "ini",
+        "tsx",
+        "typescript",
+        "ts",
+        "js",
+        "jsx",
+        "graphql",
+        "python",
+        "sql",
+        "yaml",
+      ]}
+    >
       <html lang="en">
         <head></head>
-        <body>{children}</body>
+        <body>
+          <ThemeProvider attribute={["class", "data-theme"]}>
+            {children}
+          </ThemeProvider>
+          <TailwindIndicator />
+        </body>
       </html>
     </RootProvider>
-  );
+  )
 }
 
-export const getConfig = async () => {
+export const getConfig = () => {
   return {
     render: "static",
-  };
-};
+  }
+}

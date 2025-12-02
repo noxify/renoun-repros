@@ -4,26 +4,20 @@
 import type { PathsForPages, GetConfigResponse } from 'waku/router';
 
 // prettier-ignore
+import type { getConfig as File_HomeIndex_getConfig } from './pages/(home)/index';
+// prettier-ignore
 import type { getConfig as File_Root_getConfig } from './pages/_root';
 // prettier-ignore
-import type { getConfig as File_About_getConfig } from './pages/about';
+import type { getConfig as File_DocsSlugIndex_getConfig } from './pages/docs/[...slug]/index';
 // prettier-ignore
-import type { getConfig as File_BlogSlugIndex_getConfig } from './pages/blog/[slug]/index';
-// prettier-ignore
-import type { getConfig as File_BlogIndex_getConfig } from './pages/blog/index';
-// prettier-ignore
-import type { getConfig as File_Index_getConfig } from './pages/index';
-// prettier-ignore
-import type { getConfig as File_TagsSlugIndex_getConfig } from './pages/tags/[slug]/index';
+import type { getConfig as File_DocsIndex_getConfig } from './pages/docs/index';
 
 // prettier-ignore
 type Page =
+| ({ path: '/' } & GetConfigResponse<typeof File_HomeIndex_getConfig>)
 | ({ path: '/_root' } & GetConfigResponse<typeof File_Root_getConfig>)
-| ({ path: '/about' } & GetConfigResponse<typeof File_About_getConfig>)
-| ({ path: '/blog/[slug]' } & GetConfigResponse<typeof File_BlogSlugIndex_getConfig>)
-| ({ path: '/blog' } & GetConfigResponse<typeof File_BlogIndex_getConfig>)
-| ({ path: '/' } & GetConfigResponse<typeof File_Index_getConfig>)
-| ({ path: '/tags/[slug]' } & GetConfigResponse<typeof File_TagsSlugIndex_getConfig>);
+| ({ path: '/docs/[...slug]' } & GetConfigResponse<typeof File_DocsSlugIndex_getConfig>)
+| ({ path: '/docs' } & GetConfigResponse<typeof File_DocsIndex_getConfig>);
 
 // prettier-ignore
 declare module 'waku/router' {

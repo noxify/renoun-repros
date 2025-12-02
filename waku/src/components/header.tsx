@@ -1,39 +1,38 @@
-"use client";
+"use client"
 
-import { Link } from "waku";
-import { Menu, X } from "lucide-react";
-import { ComponentProps, useState } from "react";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { useState } from "react"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { Menu, X } from "lucide-react"
 
-type NavItem = { href: ComponentProps<typeof Link>["to"]; label: string };
+import { LogoButton } from "./logo-button"
+
+interface NavItem {
+  href: string
+  label: string
+}
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navItems: NavItem[] = [
     { href: "/", label: "Home" },
-    { href: "/blog", label: "Blog" },
-    { href: "/about", label: "About" },
-  ];
+    { href: "/docs/", label: "Docs" },
+  ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="text-xl font-bold">Waku Renoun Blog</div>
-        </Link>
-
+        <LogoButton size="lg" />
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.href}
-              to={item.href}
+              href={item.href}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {item.label}
-            </Link>
+            </a>
           ))}
           <ThemeToggle />
         </nav>
@@ -53,21 +52,21 @@ export function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <nav className="md:hidden border-t border-border bg-background">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+        <nav className="border-t border-border bg-background md:hidden">
+          <div className="container mx-auto flex flex-col gap-4 px-4 py-4">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.href}
-                to={item.href}
+                href={item.href}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
           </div>
         </nav>
       )}
     </header>
-  );
+  )
 }

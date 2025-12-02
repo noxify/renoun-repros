@@ -1,21 +1,38 @@
 {
   "compilerOptions": {
+    "erasableSyntaxOnly": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
-    "target": "esnext",
-    "noEmit": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "skipLibCheck": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "vite/client"
+    ],
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    "module": "esnext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
-  }
+  },
+  "include": [
+    "src",
+    "waku.config.ts",
+    "types",
+    "localserver.mjs"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

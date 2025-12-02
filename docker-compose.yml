@@ -1,0 +1,63 @@
+services:
+  vite-rsc:
+    build:
+      context: .
+      dockerfile: ./vite-rsc/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./shared/content:/app/content:ro
+    environment:
+      - NODE_ENV=production
+    deploy:
+      # simulate vercel default limits
+      # https://vercel.com/docs/builds/managing-builds#larger-build-machines
+      resources:
+        limits:
+          cpus: "4"
+          memory: 8G
+    restart: unless-stopped
+    networks:
+      - renoun-network
+
+  waku:
+    build:
+      context: ./
+      dockerfile: ./waku/Dockerfile
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./shared/content:/app/content:ro
+    environment:
+      - NODE_ENV=production
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 8G
+    restart: unless-stopped
+    networks:
+      - renoun-network
+
+  next:
+    build:
+      context: ./next
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./shared/content:/app/content:ro
+    environment:
+      - NODE_ENV=production
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 8G
+    restart: unless-stopped
+    networks:
+      - renoun-network
+
+networks:
+  renoun-network:
+    driver: bridge

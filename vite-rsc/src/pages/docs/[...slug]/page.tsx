@@ -5,22 +5,13 @@ import { FileContent } from "@/components/file-content"
 import { removeFromArray } from "@/lib/utils"
 
 export async function generateStaticParams() {
-  const slugs = []
-
   const entries = await transformedEntries()
-
-  for (const entry of entries) {
-    slugs.push({
-      slug: removeFromArray(entry.segments, ["docs"]),
-    })
-  }
 
   const staticPaths = entries
     // get all possible routes including the collection routes
     .map((entry) => {
       return { slug: removeFromArray(entry.segments, ["docs"]) }
     })
-    // since we have a dedicated page for /docs/[collection], we can skip the empty slug entries here
     .filter(({ slug }) => slug.length > 0)
 
   return staticPaths
