@@ -18,7 +18,7 @@ FROM base AS deps
 WORKDIR /app
 
 COPY vite-rsc/package.json vite-rsc/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --shamefully-hoist
 
 # Builder stage
 FROM base AS builder

@@ -41,12 +41,12 @@ services:
 
   next:
     build:
-      context: ./next
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./next/Dockerfile
     ports:
       - "3002:3000"
-    volumes:
-      - ./shared/content:/app/content:ro
+    # volumes:
+    #   - ./shared/content:/app/content:ro
     environment:
       - NODE_ENV=production
     deploy:

@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import rsc from "@vitejs/plugin-rsc"
 import rehypeMdxImportMedia from "rehype-mdx-import-media"
+import rehypeUnwrapimages from "rehype-unwrap-images"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkGfm from "remark-gfm"
 import remarkMdxFrontmatter from "remark-mdx-frontmatter"
@@ -60,7 +61,11 @@ export default defineConfig(({ command }) => ({
     // MDX support with Renoun plugins
     mdx({
       providerImportSource: "mdx-components",
-      rehypePlugins: [...renounRehypePlugins, rehypeMdxImportMedia],
+      rehypePlugins: [
+        ...renounRehypePlugins,
+        rehypeMdxImportMedia,
+        rehypeUnwrapimages,
+      ],
       remarkPlugins: [
         remarkFrontmatter,
         remarkMdxFrontmatter,

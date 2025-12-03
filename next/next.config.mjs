@@ -29,6 +29,11 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   poweredByHeader: false,
+  experimental: {
+    // using only one cpu in CI - this is the same as running it without this option
+    // in a vercel deloyment
+    cpus: process.env.CI ? 1 : undefined,
+  },
 
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   typescript: { ignoreBuildErrors: true },

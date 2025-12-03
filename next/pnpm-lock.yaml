@@ -101,6 +101,9 @@ importers:
       rehype-mdx-import-media:
         specifier: 1.2.0
         version: 1.2.0
+      rehype-unwrap-images:
+        specifier: 1.0.0
+        version: 1.0.0
       remark-frontmatter:
         specifier: 5.0.0
         version: 5.0.0

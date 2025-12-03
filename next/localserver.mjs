@@ -3,7 +3,7 @@ import serveHandler from "serve-handler"
 
 const server = createServer((req, res) =>
   serveHandler(req, res, {
-    public: "dist/public/", // folder of files to serve
+    public: "out/", // folder of files to serve
   }),
 )
 

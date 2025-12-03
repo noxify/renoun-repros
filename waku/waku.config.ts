@@ -4,6 +4,7 @@ import { rehypePlugins as renounRehypePlugins } from "@renoun/mdx/rehype"
 import { remarkPlugins as renounRemarkPlugins } from "@renoun/mdx/remark"
 import tailwindcss from "@tailwindcss/vite"
 import rehypeMdxImportMedia from "rehype-mdx-import-media"
+import rehypeUnwrapimages from "rehype-unwrap-images"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkGfm from "remark-gfm"
 import remarkMdxFrontmatter from "remark-mdx-frontmatter"
@@ -54,7 +55,11 @@ export default defineConfig({
       tailwindcss(),
       mdx({
         providerImportSource: "mdx-components",
-        rehypePlugins: [...renounRehypePlugins, rehypeMdxImportMedia],
+        rehypePlugins: [
+          ...renounRehypePlugins,
+          rehypeMdxImportMedia,
+          rehypeUnwrapimages,
+        ],
         remarkPlugins: [
           remarkFrontmatter,
           remarkMdxFrontmatter,
