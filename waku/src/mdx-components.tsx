@@ -154,6 +154,7 @@ export function useMDXComponents() {
           className={{ container: "my-4!" }}
           shouldAnalyze={false}
           shouldFormat={false}
+          allowErrors={true}
         />
       )
     },
