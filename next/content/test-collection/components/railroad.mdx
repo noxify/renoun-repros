@@ -1,0 +1,119 @@
+---
+title: "Railroad"
+---
+
+## Source
+
+The component uses https://github.com/tabatkins/railroad-diagrams
+
+## example
+
+<Preview>
+  <Railroad
+    content={`
+      Diagram(
+        Optional('+', 'skip'),
+        Choice(0,
+          NonTerminal('name-start char'),
+          NonTerminal('escape')
+        ),
+        ZeroOrMore(
+          Choice(0,
+            NonTerminal('name char'),
+            NonTerminal('escape')
+          )
+        )
+      )
+    `}
+  />
+</Preview>
+
+### Alternative via markdown syntax
+
+````
+```railroad
+Diagram(
+  Optional('+', 'skip'),
+  Choice(0,
+    NonTerminal('name-start char'),
+    NonTerminal('escape')
+  ),
+  ZeroOrMore(
+    Choice(0,
+      NonTerminal('name char'),
+      NonTerminal('escape')
+    )
+  )
+)
+```
+
+````
+
+## example 2
+
+<Preview>
+  <Railroad
+    content={`
+      Diagram(
+        Optional(
+          Choice(0,'Let','Set')
+          ),
+          NonTerminal('variable'),
+          Terminal('='),
+          Choice(0,
+            NonTerminal('expression'),
+            Sequence(Optional('New'),NonTerminal('object')
+          )
+        )
+      )
+    `}
+  />
+</Preview>
+
+## Live example with background
+
+```tsx
+<Railroad wrapped={true} content="..." />
+```
+
+<Railroad
+  wrapped={true}
+  content={`
+    Diagram(
+      Optional(
+        Choice(0,'Let','Set')
+        ),
+        NonTerminal('variable'),
+        Terminal('='),
+        Choice(0,
+          NonTerminal('expression'),
+          Sequence(Optional('New'),NonTerminal('object')
+        )
+      )
+    )
+  `}
+/>
+
+## Live example without background
+
+```tsx
+<Railroad wrapped={false} content="..." />
+```
+
+<Railroad
+  wrapped={false}
+  content={`
+    Diagram(
+      Optional(
+        Choice(0,'Let','Set')
+        ),
+        NonTerminal('variable'),
+        Terminal('='),
+        Choice(0,
+          NonTerminal('expression'),
+          Sequence(Optional('New'),NonTerminal('object')
+        )
+      )
+    )
+  `}
+/>

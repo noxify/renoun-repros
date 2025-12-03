@@ -36,35 +36,25 @@ export function generateDirectories() {
         !entry.getBaseName().startsWith("_") &&
         !entry.getBaseName().startsWith(".") &&
         !entry.getAbsolutePath().includes("_assets"),
-      loader: () => {
-        const modules = import.meta.glob<DocSchema>(`../content/**/*.mdx`)
+      loader: {
+        mdx: withSchema<DocSchema>(async (path) => {
+          const pageContent = await import(
+            `../content/${directory}/${path}.mdx`
+          )
 
-        return {
-          mdx: withSchema<DocSchema>(async (filePath) => {
-            const modulesPath = `../content/${directory}/${filePath}.mdx`
+          const frontmatter = await frontmatterSchema.safeParseAsync(
+            pageContent.frontmatter,
+          )
 
-            const moduleLoader = modules[modulesPath]
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-            if (!moduleLoader) {
-              throw new Error(`Module not found: ${modulesPath}`)
-            }
-
-            const pageContent = await moduleLoader()
-
-            const frontmatter = await frontmatterSchema.safeParseAsync(
-              pageContent.frontmatter,
+          if (!frontmatter.success) {
+            console.error(
+              `frontmatter validation failed for file: ${path} in directory: ${directory}`,
             )
+            throw frontmatter.error
+          }
 
-            if (!frontmatter.success) {
-              console.error(
-                `frontmatter validation failed for file: ${filePath} in directory: ${directory}`,
-              )
-              throw frontmatter.error
-            }
-
-            return { ...pageContent, frontmatter: frontmatter.data }
-          }),
-        }
+          return { ...pageContent, frontmatter: frontmatter.data }
+        }),
       },
     })
   })
