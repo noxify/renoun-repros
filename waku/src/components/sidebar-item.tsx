@@ -41,24 +41,31 @@ export function SidebarItem({ item }: { item: TreeItem }) {
 
   return (
     <SidebarMenuItem>
-      <Collapsible defaultOpen={isActive} className="group/collapsible">
-        <CollapsibleTrigger asChild>
-          <SidebarMenuButton
-            isActive={isActive}
-            className="[&[data-state=open]>svg:last-child]:rotate-90"
-          >
-            <RenderIcon icon={item.icon} className="mr-2 h-4 w-4" />
-            <span>{item.title}</span>
-            <ChevronRight className="ml-auto transition-transform" />
-          </SidebarMenuButton>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <SidebarMenuSub className="mr-0 ml-2 pr-0 pl-2">
-            {item.children.map((subItem, index) => (
-              <SidebarItem key={index} item={subItem} />
-            ))}
-          </SidebarMenuSub>
-        </CollapsibleContent>
+      <Collapsible
+        key={`${item.path}-${isActive}`}
+        defaultOpen={isActive}
+        className="group/collapsible"
+        asChild
+      >
+        <>
+          <CollapsibleTrigger asChild>
+            <SidebarMenuButton
+              isActive={isActive}
+              className="[&[data-state=open]>svg:last-child]:rotate-90"
+            >
+              <RenderIcon icon={item.icon} className="mr-2 h-4 w-4" />
+              <span>{item.title}</span>
+              <ChevronRight className="ml-auto transition-transform" />
+            </SidebarMenuButton>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <SidebarMenuSub className="mr-0 ml-2 pr-0 pl-2">
+              {item.children.map((subItem, index) => (
+                <SidebarItem key={index} item={subItem} />
+              ))}
+            </SidebarMenuSub>
+          </CollapsibleContent>
+        </>
       </Collapsible>
     </SidebarMenuItem>
   )
